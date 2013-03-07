@@ -17,8 +17,8 @@ Simply install bootstrap.progress-bar-labels.js in your application with a scrip
 And then start adding labels to your progress bars, by adding the following attributes:
 
 * **class**: `"progress progress-labelled"` (using progress-labelled means that labels are automatically added to the progress bar)
-* **data-max**: The upper bound of the scale - e.g. 100. Must be present, and be a number.
-* **data-scale**: The number to increment for each label - e.g. 10. Must be present, and be a number.
+* **data-label-max**: The upper bound of the scale - e.g. 100. Must be present, and be a number.
+* **data-label-scale**: The number to increment for each label - e.g. 10. Must be present, and be a number.
 
 
 Contribution:
