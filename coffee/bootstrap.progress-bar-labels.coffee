@@ -13,6 +13,7 @@ $.fn.progressBarLabels = ->
 		progress = $(this)
 		maximum = progress.data('label-max')
 		step    = progress.data('label-step')
+		minimum = progress.data('label-min') || 0
 		label_append = progress.data('label-append')
 
 		return unless maximum and step
@@ -22,36 +23,36 @@ $.fn.progressBarLabels = ->
 		container.addClass('label-group')
 		container.width("100%")
 
-		for index in [0..(maximum / step)] 
-			multiplier = container.width() / (maximum )
+		for index in [0..((maximum - minimum) / step)]
+			multiplier = container.width() / (maximum - minimum)
 			label = $("<label></label>")
 
 			# Position labels beside one another
 			label.css(
-				"left": "#{index * (step * multiplier)}%", 
+				"left": "#{index * (step * multiplier)}%",
 				"width": "#{step * multiplier}%",
-				"display": "block", 
+				"display": "block",
 				"text-align": "center",
 				"position": "absolute",
 				"margin-left": "-#{(step * multiplier) / 2}%"
 			)
-			label.html((index * step) + label_append)
+			label.html(((index + minimum) * step) + label_append)
 
 			# Add line through progress bar
 			vertical_rule = $('<div></div>')
 			vertical_rule.css(
-				"position": "absolute", 
+				"position": "absolute",
 				"left": "50%",
-				"top": "-#{progress.height()}px", 
-				"height": "#{progress.height()}", 
-				"border-left": "solid 2px #f5f5f5"
+				"top": "-#{progress.height()/4}px",
+				"height": "#{progress.height()/2}",
+				"border-left": "solid 2px #666666"
 			)
 
 			# Exceptions - first or last element
 			if index == 0
 				vertical_rule.css("border-left": "none")
 
-			if index == (maximum / step)
+			if index == ((maximum - minimum) / step)
 				vertical_rule.css("border-left": "none")
 
 			label.prepend(vertical_rule)
@@ -61,6 +62,7 @@ $.fn.progressBarLabels = ->
 		progress.append(container)
 		progress.css("position": "relative", "overflow": "visible")
 		container.css("top": progress.height(), "position": "absolute")
+
 
 $ ->
 	$('.progress-labelled').progressBarLabels()

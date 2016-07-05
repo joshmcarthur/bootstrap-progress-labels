@@ -6,10 +6,11 @@
 
   $.fn.progressBarLabels = function() {
     return this.each(function() {
-      var container, index, label, label_append, maximum, multiplier, progress, step, vertical_rule, _i, _ref;
+      var container, index, label, label_append, maximum, minimum, multiplier, progress, step, vertical_rule, _i, _ref;
       progress = $(this);
       maximum = progress.data('label-max');
       step = progress.data('label-step');
+      minimum = progress.data('label-min') || 0;
       label_append = progress.data('label-append');
       if (!(maximum && step)) {
         return;
@@ -20,8 +21,8 @@
       container = $('<div></div>');
       container.addClass('label-group');
       container.width("100%");
-      for (index = _i = 0, _ref = maximum / step; 0 <= _ref ? _i <= _ref : _i >= _ref; index = 0 <= _ref ? ++_i : --_i) {
-        multiplier = container.width() / maximum;
+      for (index = _i = 0, _ref = (maximum - minimum) / step; 0 <= _ref ? _i <= _ref : _i >= _ref; index = 0 <= _ref ? ++_i : --_i) {
+        multiplier = container.width() / (maximum - minimum);
         label = $("<label></label>");
         label.css({
           "left": "" + (index * (step * multiplier)) + "%",
@@ -31,21 +32,21 @@
           "position": "absolute",
           "margin-left": "-" + ((step * multiplier) / 2) + "%"
         });
-        label.html((index * step) + label_append);
+        label.html(((index + minimum) * step) + label_append);
         vertical_rule = $('<div></div>');
         vertical_rule.css({
           "position": "absolute",
           "left": "50%",
-          "top": "-" + (progress.height()) + "px",
-          "height": "" + (progress.height()),
-          "border-left": "solid 2px #f5f5f5"
+          "top": "-" + (progress.height() / 4) + "px",
+          "height": "" + (progress.height() / 2),
+          "border-left": "solid 2px #666666"
         });
         if (index === 0) {
           vertical_rule.css({
             "border-left": "none"
           });
         }
-        if (index === (maximum / step)) {
+        if (index === ((maximum - minimum) / step)) {
           vertical_rule.css({
             "border-left": "none"
           });
