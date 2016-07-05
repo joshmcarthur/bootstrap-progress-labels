@@ -13,6 +13,7 @@ $.fn.progressBarLabels = ->
 		progress = $(this)
 		maximum = progress.data('label-max')
 		step    = progress.data('label-step')
+		label_append = progress.data('label-append')
 
 		return unless maximum and step
 		return unless progress.hasClass('progress')
@@ -34,7 +35,7 @@ $.fn.progressBarLabels = ->
 				"position": "absolute",
 				"margin-left": "-#{(step * multiplier) / 2}%"
 			)
-			label.html(index * step)
+			label.html((index * step) + label_append)
 
 			# Add line through progress bar
 			vertical_rule = $('<div></div>')
