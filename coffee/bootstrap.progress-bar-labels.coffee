@@ -36,7 +36,7 @@ $.fn.progressBarLabels = ->
 				"position": "absolute",
 				"margin-left": "-#{(step * multiplier) / 2}%"
 			)
-			label.html(((index + minimum) * step) + label_append)
+			label.html(((index * step) + minimum) + label_append)
 
 			# Add line through progress bar
 			vertical_rule = $('<div></div>')
