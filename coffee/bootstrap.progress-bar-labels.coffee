@@ -1,9 +1,9 @@
 # global jQuery */
-# !	
+# !
 # Bootstrap Progressbar Labels v1.0
 # Copyright 2013, Josh McArthur, joshmcarthur.com
-# Released under the MIT license 
-# 
+# Released under the MIT license
+#
 
 
 $ = jQuery
