@@ -31,6 +31,28 @@ describe "Bootstrap Labelled Progressbars", ->
 		$('.progress').progressBarLabels()
 		expect($('.label-group', '.progress').length).toBe(1)
 
+	it 'should start at zero if no minimum is provided', ->
+		$('.progress').progressBarLabels();
+		expect($('.progress .label-group label:first').text()).toBe("0")
+
+	it 'should start at the minimum if provided', ->
+		$('.progress')
+			.attr("data-label-min", 10)
+			.progressBarLabels();
+		expect($('.progress .label-group label:first').text()).toBe("10")
+
+	it 'should end at the maximum', ->
+		$('.progress').progressBarLabels();
+		expect($('.progress .label-group label:last').text()).toBe("100")
+
+	it 'should append labels if provided', ->
+		$('.progress')
+			.attr('data-label-append', ' widgets')
+			.progressBarLabels();
+
+		expect($('.progress .label-group label:first').text()).toBe("0 widgets");
+
+
 	it 'should add the correct number of step labels', ->
 		$('.progress').progressBarLabels()
 
