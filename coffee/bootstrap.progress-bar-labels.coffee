@@ -14,7 +14,7 @@ $.fn.progressBarLabels = ->
 		maximum = progress.data('label-max')
 		step    = progress.data('label-step')
 		minimum = progress.data('label-min') || 0
-		label_append = progress.data('label-append')
+		label_append = progress.data('label-append') || ""
 
 		return unless maximum and step
 		return unless progress.hasClass('progress')
